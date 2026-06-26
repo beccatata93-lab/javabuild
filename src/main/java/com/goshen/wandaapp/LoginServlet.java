@@ -2,14 +2,14 @@ package com.goshen.wandaapp;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/login")
+/* Note: @WebServlet annotation removed here to prevent duplication conflicts with web.xml */
 public class LoginServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
     
     // Serve the login page on a GET request
     @Override
@@ -26,14 +26,14 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        // Simple validation rule (Change these to your preferred credentials)
+        // Verification validation rule
         if ("admin".equals(username) && "goshen2026".equals(password)) {
             // Create a session to keep the user logged in
             HttpSession session = request.getSession();
             session.setAttribute("user", username);
             
-            // Redirect straight to your existing balance dashboard servlet path
-            response.sendRedirect("balance"); 
+            // Redirect straight to your dashboard pattern defined in web.xml
+            response.sendRedirect("dashboard"); 
         } else {
             // Send back to the page with an error notice
             request.setAttribute("errorMessage", "Invalid Username or Password!");
